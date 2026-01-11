@@ -1,11 +1,10 @@
 
 import { GoogleGenAI } from "@google/genai";
-import { ChatMessage } from "./types";
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+import { ChatMessage } from "./types.ts";
 
 export const getWcmTutorResponse = async (history: ChatMessage[], userMessage: string) => {
   try {
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const chat = ai.chats.create({
       model: 'gemini-3-pro-preview',
       config: {
@@ -18,9 +17,9 @@ export const getWcmTutorResponse = async (history: ChatMessage[], userMessage: s
     });
 
     const result = await chat.sendMessage({ message: userMessage });
-    return result.text;
+    return result.text || "I processed your request but couldn't generate a text response.";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "I'm having trouble accessing my Manufacturing Excellence database. Please try again.";
+    return "I'm having trouble accessing my Manufacturing Excellence database. Please ensure the environment is correctly configured and try again.";
   }
 };

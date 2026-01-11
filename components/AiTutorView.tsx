@@ -45,15 +45,15 @@ const AiTutorView: React.FC<AiTutorViewProps> = ({ currentFramework }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto h-[calc(100vh-200px)] flex flex-col bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 overflow-hidden transition-all">
-      <div className="bg-slate-900 dark:bg-slate-950 p-4 flex items-center justify-between text-white border-b border-slate-800">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center shadow-lg transform rotate-3">
-            <Sparkles size={20} />
+    <div className="max-w-4xl mx-auto h-[calc(100vh-140px)] lg:h-[calc(100vh-200px)] flex flex-col bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 overflow-hidden transition-all">
+      <div className="bg-slate-900 dark:bg-slate-950 p-3 lg:p-4 flex items-center justify-between text-white border-b border-slate-800">
+        <div className="flex items-center gap-2 lg:gap-3">
+          <div className="w-8 h-8 lg:w-10 lg:h-10 bg-blue-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-lg transform rotate-3">
+            <Sparkles size={16} className="lg:size-5" />
           </div>
           <div>
-            <h3 className="font-bold">{currentFramework} Master Consultant</h3>
-            <p className="text-[10px] text-blue-300 uppercase font-black tracking-widest">AI Engineering Support</p>
+            <h3 className="text-sm lg:text-base font-bold truncate max-w-[150px] lg:max-w-none">{currentFramework} Master Consultant</h3>
+            <p className="text-[8px] lg:text-[10px] text-blue-300 uppercase font-black tracking-widest">AI Engineering Support</p>
           </div>
         </div>
         <button 
@@ -65,16 +65,16 @@ const AiTutorView: React.FC<AiTutorViewProps> = ({ currentFramework }) => {
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-slate-200 dark:scroll-thumb-slate-800">
+      <div className="flex-1 overflow-y-auto p-4 lg:p-6 space-y-4 lg:space-y-6 scrollbar-thin scrollbar-thumb-slate-200 dark:scroll-thumb-slate-800">
         {messages.map((m, idx) => (
           <div key={idx} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-in slide-in-from-bottom-2 duration-300`}>
-            <div className={`flex gap-3 max-w-[85%] ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm ${
+            <div className={`flex gap-2 lg:gap-3 max-w-[95%] lg:max-w-[85%] ${m.role === 'user' ? 'flex-row-reverse' : ''}`}>
+              <div className={`w-6 h-6 lg:w-8 lg:h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm ${
                 m.role === 'user' ? 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400' : 'bg-blue-600 text-white'
               }`}>
-                {m.role === 'user' ? <User size={16} /> : <Bot size={16} />}
+                {m.role === 'user' ? <User size={12} className="lg:size-4" /> : <Bot size={12} className="lg:size-4" />}
               </div>
-              <div className={`p-4 rounded-2xl text-sm leading-relaxed shadow-sm ${
+              <div className={`p-3 lg:p-4 rounded-xl lg:rounded-2xl text-xs lg:text-sm leading-relaxed shadow-sm ${
                 m.role === 'user' 
                   ? 'bg-blue-600 text-white rounded-tr-none' 
                   : 'bg-slate-50 dark:bg-slate-800/50 text-slate-800 dark:text-slate-200 border border-slate-100 dark:border-slate-700 rounded-tl-none prose prose-slate dark:prose-invert max-w-none'
@@ -88,13 +88,13 @@ const AiTutorView: React.FC<AiTutorViewProps> = ({ currentFramework }) => {
         ))}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="flex gap-3">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0">
-                <Bot size={16} />
+            <div className="flex gap-2 lg:gap-3">
+              <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0">
+                <Bot size={12} className="lg:size-4" />
               </div>
-              <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 flex items-center gap-3">
-                <Loader2 size={16} className="animate-spin text-blue-600" />
-                <span className="text-sm text-slate-500 dark:text-slate-400 font-medium italic">Analyzing manufacturing data...</span>
+              <div className="bg-slate-50 dark:bg-slate-800/50 p-3 lg:p-4 rounded-xl lg:rounded-2xl border border-slate-100 dark:border-slate-700 flex items-center gap-3">
+                <Loader2 size={14} className="animate-spin text-blue-600" />
+                <span className="text-[10px] lg:text-sm text-slate-500 dark:text-slate-400 font-medium italic">Analyzing manufacturing data...</span>
               </div>
             </div>
           </div>
@@ -102,7 +102,7 @@ const AiTutorView: React.FC<AiTutorViewProps> = ({ currentFramework }) => {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
+      <div className="p-3 lg:p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
         <form 
           onSubmit={(e) => { e.preventDefault(); handleSend(); }}
           className="flex gap-2"
@@ -111,18 +111,18 @@ const AiTutorView: React.FC<AiTutorViewProps> = ({ currentFramework }) => {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={`Ask about ${currentFramework} implementation...`}
-            className="flex-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all shadow-inner text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
+            placeholder="Ask a technical question..."
+            className="flex-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg lg:rounded-xl px-3 lg:px-4 py-2 lg:py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-all text-xs lg:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
           />
           <button 
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="bg-blue-600 dark:bg-blue-500 text-white p-3 rounded-xl hover:bg-blue-700 dark:hover:bg-blue-600 disabled:bg-slate-400 dark:disabled:bg-slate-700 transition-colors shadow-lg active:scale-95"
+            className="bg-blue-600 dark:bg-blue-500 text-white p-2 lg:p-3 rounded-lg lg:rounded-xl hover:bg-blue-700 dark:hover:bg-blue-600 disabled:bg-slate-400 dark:disabled:bg-slate-700 transition-colors shadow-lg"
           >
-            <Send size={20} />
+            <Send size={18} className="lg:size-5" />
           </button>
         </form>
-        <p className="text-[10px] text-center text-slate-400 dark:text-slate-500 mt-2 font-bold tracking-widest uppercase">Expert Domain: {currentFramework} Methodology</p>
+        <p className="text-[8px] lg:text-[10px] text-center text-slate-400 dark:text-slate-500 mt-2 font-bold tracking-widest uppercase">Expert Domain: {currentFramework} Methodology</p>
       </div>
     </div>
   );

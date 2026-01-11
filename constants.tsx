@@ -1,5 +1,5 @@
 
-import { Pillar, FrameworkType } from './types';
+import { Pillar, FrameworkType } from './types.ts';
 
 export const WCM_PILLARS: Pillar[] = [
   {
